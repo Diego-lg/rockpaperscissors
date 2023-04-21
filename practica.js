@@ -16,36 +16,56 @@
     button_scissors.appendChild(buttonText_scissors)
 
 function getComputerChoice(playerSelection, computerSelection){
+
+    // CHECK IF THERE IS ALREADY AN ANSWER 
+
+    var oldAnswer = document.getElementById("answer");
+    if (oldAnswer) {
+      oldAnswer.parentNode.removeChild(oldAnswer);
+    }   
+
+    //CALCULATE THE ANSWER 
+
+    var answer = "";
+    
     let player = playerSelection;
     let ia = computerSelection;
+
     if (playerSelection==computerSelection)
     {
-        return console.log('TIE');
+        answer = ('TIE');
     }
     if(playerSelection =='rock' && computerSelection =='scissors')
     {
-        return console.log(`YOU WON`);
+        answer = (`YOU WON`);
     }
     if(playerSelection =='scissors' && computerSelection =='rock')
     {
-        return console.log(`YOU LOST`);
+        answer = (`YOU LOST`);
     }
     if(playerSelection =='paper' && computerSelection =='scissors')
     {
-        return console.log(`YOU WON`);
+        answer = (`YOU WON`);
     }
     if(playerSelection =='scissors' && computerSelection =='paper')
     {
-        return console.log(`YOU LOST`);
+        answer = (`YOU LOST`);
     }
     if(playerSelection =='rock' && computerSelection =='paper')
     {
-        return console.log(`YOU LOST`);
+        answer = (`YOU LOST`);
     }
     if(playerSelection =='paper' && computerSelection =='rock')
     {
-        return console.log(`YOU WON`);
+        answer = (`YOU WON`);
     }
+
+    var myTextElement = document.createElement("p");
+    myTextElement.id = "answer";
+    myTextElement.innerHTML = answer;
+    document.body.appendChild(myTextElement);
+
+    console.log(answer);
 }
 
 function computerSelection(){
@@ -69,15 +89,18 @@ var seleccion = "";
     // Add an event listener to the button
     button_rock.addEventListener("click", function() {
         seleccion = "rock";
-
+        getComputerChoice(seleccion, computerSelection())
+        
     });
     button_paper.addEventListener("click", function(){
-        return seleccion = "paper";
+        seleccion = "paper";
+        getComputerChoice(seleccion, computerSelection())
 
     });
     button_scissors.addEventListener("click", function(){
-        return seleccion = "scissors";
-    
+        seleccion = "scissors";
+        getComputerChoice(seleccion, computerSelection())
+
     });
 
     
@@ -95,16 +118,12 @@ var seleccion = "";
 
         
     //var seleccion = prompt('WHAT IS YOUR CHOICE:').toLowerCase();
-    return seleccion;
+    
 }
 
 function playRound()
 {
-    
-    for(var pox = 1; pox<=3; pox++){
-        getComputerChoice(playerSelection(),computerSelection());
-        //console.log(Math.floor((Math.random() * 3)));
-    }
+    playerSelection();
     return;
 }   
 playRound();

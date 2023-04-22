@@ -1,37 +1,68 @@
-// let name = prompt('what is your name');
-// console.log(name);
+// BOTONES
+    var button_rock = document.createElement("button");
+    var button_paper = document.createElement("button");
+    var button_scissors = document.createElement("button");
+    
+    // Set the text content of the button
+    var buttonText_rock = document.createTextNode("ROCK");
+    var buttonText_paper = document.createTextNode("PAPER");
+    var buttonText_scissors = document.createTextNode("SCISSORS");
+
+    button_rock.appendChild(buttonText_rock);
+    button_paper.appendChild(buttonText_paper);
+    button_scissors.appendChild(buttonText_scissors)
 
 function getComputerChoice(playerSelection, computerSelection){
+
+    // CHECK IF THERE IS ALREADY AN ANSWER 
+
+    var oldAnswer = document.getElementById("answer");
+    if (oldAnswer) {
+      oldAnswer.parentNode.removeChild(oldAnswer);
+    }   
+
+    //CALCULATE THE ANSWER 
+
+    var answer = "";
+    
     let player = playerSelection;
     let ia = computerSelection;
+
     if (playerSelection==computerSelection)
     {
-        return console.log('YOU TIED! o.O but not anymore pin pam pun');
+        answer = ('TIE');
     }
     if(playerSelection =='rock' && computerSelection =='scissors')
     {
-        return console.log(`Your ${player}, fucking beats IA ${ia}`);
+        answer = (`YOU WON`);
     }
     if(playerSelection =='scissors' && computerSelection =='rock')
     {
-        return console.log(`Your ${player}, got beat for an IA ${ia} you're dumb dumb dumb`);
+        answer = (`YOU LOST`);
     }
     if(playerSelection =='paper' && computerSelection =='scissors')
     {
-        return console.log(`Your ${player}, fucking beats IA ${ia} pum pum skinny boy`);
+        answer = (`YOU WON`);
     }
     if(playerSelection =='scissors' && computerSelection =='paper')
     {
-        return console.log(`Your ${player}, got beat for an IA ${ia} you dumbass useless piece of shit`);
+        answer = (`YOU LOST`);
     }
     if(playerSelection =='rock' && computerSelection =='paper')
     {
-        return console.log(`Your ${player}, got beat for an IA ${ia} you dumbass useless piece of shit`);
+        answer = (`YOU LOST`);
     }
     if(playerSelection =='paper' && computerSelection =='rock')
     {
-        return console.log(`Your ${player}, fucking beats IA ${ia}`);
+        answer = (`YOU WON`);
     }
+
+    var myTextElement = document.createElement("p");
+    myTextElement.id = "answer";
+    myTextElement.innerHTML = answer;
+    document.body.appendChild(myTextElement);
+
+    console.log(answer);
 }
 
 function computerSelection(){
@@ -45,16 +76,51 @@ function computerSelection(){
 }
 
 function playerSelection(){
-    var seleccion = prompt('WHAT IS YOUR CHOICE:').toLowerCase();
-    return seleccion;
+//respuesta     
+var seleccion = "";
+
+
+    // Create a new button element
+    
+
+    // Add an event listener to the button
+    button_rock.addEventListener("click", function() {
+        seleccion = "rock";
+        getComputerChoice(seleccion, computerSelection())
+        
+    });
+    button_paper.addEventListener("click", function(){
+        seleccion = "paper";
+        getComputerChoice(seleccion, computerSelection())
+
+    });
+    button_scissors.addEventListener("click", function(){
+        seleccion = "scissors";
+        getComputerChoice(seleccion, computerSelection())
+
+    });
+
+    
+    // Find the div to which you want to add the button
+    var container_rock = document.getElementById("myDiv_rock");
+    var container_paper = document.getElementById("myDiv_paper");
+    var container_scissors = document.getElementById("myDiv_scissors");
+
+
+    // Append the button to the div
+    container_rock.appendChild(button_rock);
+    container_paper.appendChild(button_paper);
+    container_scissors.appendChild(button_scissors);
+
+
+        
+    //var seleccion = prompt('WHAT IS YOUR CHOICE:').toLowerCase();
+    
 }
 
 function playRound()
 {
-    for(var pox = 1; pox<=3; pox++){
-        getComputerChoice(playerSelection(),computerSelection());
-        //console.log(Math.floor((Math.random() * 3)));
-    }
+    playerSelection();
     return;
 }   
 playRound();

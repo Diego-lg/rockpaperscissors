@@ -1,11 +1,8 @@
-// let name = prompt('what is your name');
-// console.log(name);
-
- // BOTONES
+// BOTONES
     var button_rock = document.createElement("button");
     var button_paper = document.createElement("button");
     var button_scissors = document.createElement("button");
-
+    
     // Set the text content of the button
     var buttonText_rock = document.createTextNode("ROCK");
     var buttonText_paper = document.createTextNode("PAPER");
